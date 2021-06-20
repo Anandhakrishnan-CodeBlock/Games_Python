@@ -1,1 +1,59 @@
+from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot import ChatBot
+import os
 
+bot = ChatBot('kern')
+trainer = ChatterBotCorpusTrainer(bot)
+trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.english.greetings")
+trainer.train("chatterbot.corpus.english.conversations")
+
+# bot.set_trainer(ListTrainer)
+
+# for _file in os.listdir('english'):
+#    chat = open(_file, 'r').readline()
+#    bot.train(chat)
+
+while True:
+    # request = input('You: ')
+    response = bot.get_response("Hello, how are you today?")
+    print('Kern: ', response)
+
+
+
+
+-------------------------------------------
+from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot import ChatBot
+
+bot = ChatBot('kern')
+trainer = ChatterBotCorpusTrainer(bot)
+trainer.train("chatterbot.corpus.english")
+trainer.train("chatterbot.corpus.english.greetings")
+trainer.train("chatterbot.corpus.english.conversations")
+
+while True:
+    request = input('You: ')
+    response = bot.get_response(request)
+    print('Kern: ', response)
+
+
+-----------------------------------------------------------------
+from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+
+chatbot = ChatBot("Ron Obvious")
+conversation = [
+    "Hello",
+    "Hi there!",
+    "How are you doing?",
+    "I'm doing great.",
+    "That is good to hear",
+    "Thank you.",
+    "You're welcome."
+]
+trainer = ListTrainer(chatbot)
+trainer.train(conversation)
+response = chatbot.get_response("Good morning!")
+print(response)
